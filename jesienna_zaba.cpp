@@ -6,17 +6,18 @@
 
 using namespace std;
 
-int how_much_time(int position_of_leaves[], int width);
+int how_much_time(int position_of_leaves[], int width, int size_);
 
 int main()
 {
 //srand( time( 0 ) );
+// dodajemy test zaby
 
    int width_of_a_river = 5;
 
-   const int size = 8;
+   const int size_ = 8;
 
-   int A[size];
+   int A[size_];
 
     A[0] = 1;
     A[1] = 3;
@@ -33,7 +34,7 @@ int main()
    //    cout << A[i] << endl;
   // }
 
-   int time = how_much_time(A, width_of_a_river);
+   int time = how_much_time(A, width_of_a_river, size_);
 
    if (time > 0)
         cout << "Frog needs to wait for " << time << " seconds until there are enough leaves to jump across the river. " << endl;
@@ -44,7 +45,38 @@ int main()
     return 0;
 }
 
-int how_much_time(int position_of_leaves[], int width)
+int how_much_time(int position_of_leaves[], int width, int size_)
+{
+
+    vector <bool> gaps;
+
+    for (int i = 0 ; i < width; i++)
+    {
+        gaps.push_back(false);
+    }
+
+    int time = 0;
+    int leaf = 0;
+
+    for (time = 0; time < size_; time++)
+    {
+
+    if (gaps[position_of_leaves[time]] == false)
+        {
+            gaps[position_of_leaves[time]] = true;
+            leaf++;
+        }
+
+            if (leaf == width)
+            {
+                return time;
+            }
+    }
+
+    return -1;
+}
+
+/*int how_much_time(int position_of_leaves[], int width)
 {
 
     vector <int> gaps;
@@ -69,3 +101,4 @@ int how_much_time(int position_of_leaves[], int width)
 
     return -1;
 }
+*/
